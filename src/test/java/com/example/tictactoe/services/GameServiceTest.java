@@ -5,18 +5,22 @@ import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.tictactoe.pojo.GameResponse;
 
 @SpringBootTest
 public class GameServiceTest {
   
+	@Autowired
 	private GameService gameService;
 
 	Map<String,String> board;
   
 	@BeforeEach
 	public void setup() {
-		gameService = new GameService();
+		//gameService = new GameService();
 		board = new HashMap<>();
 		board.put("1", null);
 		board.put("2", null);
@@ -142,5 +146,15 @@ public class GameServiceTest {
 		
 		gameService.board = board;
 		assertEquals(true, gameService.checkIfFirstMoveIsByO("O"));
+	}
+	
+	/*
+	 * This test case updates board with the position which player moved
+	 */
+	@Test
+	public void play() {
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(new GameResponse(null, board,null) , gameService.play("1","X"));
 	}
 }

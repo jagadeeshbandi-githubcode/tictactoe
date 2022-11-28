@@ -3,7 +3,6 @@ package com.example.tictactoe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.example.tictactoe.pojo.Player;
 import com.example.tictactoe.services.GameService;
 import com.example.tictactoe.services.PlayerService;
@@ -18,15 +17,11 @@ import java.util.Map;
 @RestController
 public class GameController {
 
-    private final GameService gameStateService;
-    private final PlayerService playerService;
-
-    @Autowired
-    public GameController(GameService gameStateService, PlayerService playersService) {
-        this.gameStateService = gameStateService;
-        this.playerService = playersService;
-    }
-
+	@Autowired
+    private GameService gameStateService;
+	
+	@Autowired
+    private PlayerService playerService;
 
     /** 
      * This is the method gives current board status. 
@@ -45,4 +40,5 @@ public class GameController {
     public List<Player> getPlayers() {
         return playerService.getPlayers();
     }
+   
 }

@@ -33,4 +33,12 @@ public class PlayerServiceTest {
 		assertEquals(players, playerService.getPlayers());
 	}
 
+	/*
+	 * This test case to get Player Details
+	 */
+	@Test
+	public void getPlayerDetails() {
+		assertEquals(new Player("X", "Player 1"), playerService.getPlayer("X"));
+	}
+	
 }

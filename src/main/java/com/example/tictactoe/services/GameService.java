@@ -1,7 +1,10 @@
 package com.example.tictactoe.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.bind.annotation.RequestParam;
+import com.example.tictactoe.pojo.GameResponse;
+import com.example.tictactoe.pojo.Player;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +19,11 @@ public class GameService {
 
     public Map<String, String> board;
 
+    public Boolean gameOver;
+    
+    @Autowired
+    private PlayerService playerService;
+    
     public GameService() {
     	newGame();
     }
@@ -31,6 +39,7 @@ public class GameService {
     	this.board.put("7", null);
     	this.board.put("8", null);
     	this.board.put("9", null);
+    	this.gameOver = false;
     }
     
     /*
@@ -83,5 +92,48 @@ public class GameService {
     
     public boolean checkIfFirstMoveIsByO(String player) {
     	return this.board.values().stream().filter(Objects::isNull).count() == this.board.size() && player.equals("O") ? true : false;
+    }
+    
+    public Boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void endGame(Boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+    
+    /*
+     * This method updates board with the position which player moved
+     */
+    public GameResponse play(String position,String playerId) {
+    	playerService.played = playerId;
+    	board.put(position, playerId);
+        return new GameResponse(findWinner(), board,null);
+    }
+    
+    
+    private Player findWinner() {
+        String winner = checkWinner();
+        Player playerWinner;
+
+        if (winner != null) {
+            switch (winner) {
+                case "X":
+                case "O":
+                    playerWinner = playerService.getPlayer(winner);
+                    endGame(true);
+                    board = null;
+                    break;
+                case "draw":
+                    playerWinner = new Player("draw", "No one wins");
+                    endGame(true);
+                    break;
+                default:
+                    playerWinner = null;
+            }
+            return playerWinner;
+        }
+
+        return null;
     }
 }
