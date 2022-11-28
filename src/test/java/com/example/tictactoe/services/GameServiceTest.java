@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.tictactoe.pojo.GameResponse;
+import com.example.tictactoe.pojo.Player;
 
 @SpringBootTest
 public class GameServiceTest {
@@ -38,6 +39,7 @@ public class GameServiceTest {
 
 	@Test
 	public void getBoard() {
+		gameService.board = board;
 		assertEquals(board, gameService.board);
 	}
 
@@ -188,5 +190,20 @@ public class GameServiceTest {
 		board.put("1", "X");
 		gameService.board = board;
 		assertEquals(new GameResponse(null, null ,"Player X already played!") , gameService.play("2","X"));
+	}
+	
+	/*
+	 * This test case for already completed game
+	 */
+	@Test
+	public void validateIfGameOver() {
+		gameService.gameOver = true;
+		board.put("1", "X");
+		board.put("4", "O");
+		board.put("2", "X");
+		board.put("5", "O");
+		board.put("3", "X");
+		gameService.board = board;
+		assertEquals(new GameResponse(new Player("X", "Player 1"), null ,null) , gameService.play("6","O"));
 	}
 }

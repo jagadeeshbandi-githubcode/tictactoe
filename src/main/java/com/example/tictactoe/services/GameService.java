@@ -89,6 +89,9 @@ public class GameService {
         return null;
     }
     
+    /*
+     * This method checks if the first move is made my Player O
+     */
     public boolean checkIfFirstMoveIsByO(String player) {
     	return this.board.values().stream().filter(Objects::isNull).count() == this.board.size() && player.equals("O") ? true : false;
     }
@@ -102,10 +105,17 @@ public class GameService {
     }
     
     /*
-     * This method updates board with the position which player moved
+     * This method has different checks if move is proper, if correct it willl update board
+     * 1st Check - if game is already completed
+     * 2nd check - if same player moves multiple times
+     * 3rd check - if same position is already moved
+     * 4th check - always player X should make first move
+     * if none of the above conditions satisfies it will update board
      */
     public GameResponse play(String position,String playerId) {
-    	if(playerService.played!=null && playerService.played.equalsIgnoreCase(playerId)) {
+    	if (isGameOver()) {
+            return new GameResponse(findWinner(), board,null);
+        } else if(playerService.played!=null && playerService.played.equalsIgnoreCase(playerId)) {
             return new GameResponse(findWinner(), null ,"Player "+playerId+" already played!");
         } else if (board.get(position) != null) {
         	return new GameResponse(findWinner(), null ,"The position "+position+" is already taken!");
