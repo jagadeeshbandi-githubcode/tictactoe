@@ -93,4 +93,44 @@ public class GameServiceTest {
 		assertEquals("O", gameService.checkWinner());
 	}
 	
+	
+	/*
+	 * This test case to draw the match
+	 */
+	@Test
+	public void checkWinnerToDraw() {
+		
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("3", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("2", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("5", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("6", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("8", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("7", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("4", "O");
+		gameService.board = board;
+		assertEquals("draw", gameService.checkWinner());
+		
+	}
 }
