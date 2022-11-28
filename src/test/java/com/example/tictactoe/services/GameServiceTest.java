@@ -157,4 +157,13 @@ public class GameServiceTest {
 		gameService.board = board;
 		assertEquals(new GameResponse(null, board,null) , gameService.play("1","X"));
 	}
+	
+	/*
+	 * This test case updates board with the position which player moved
+	 */
+	@Test
+	public void checkIfFirstMoveIsByOPlayMethod() {
+		gameService.board = board;
+		assertEquals(new GameResponse(null, null ,"Only Player X can make first move!") , gameService.play("1","O"));
+	}
 }

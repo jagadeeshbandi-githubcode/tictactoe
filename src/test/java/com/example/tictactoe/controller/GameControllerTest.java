@@ -53,6 +53,9 @@ public class GameControllerTest {
 		board.put("9", null);
 	}
 	
+	/*
+	 * This controller test method used to get current board details
+	 */
 	@Test
 	public void getBoard() throws Exception {
 		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
@@ -61,4 +64,14 @@ public class GameControllerTest {
 				.andExpect(content().string(containsString(response)));
 	}
 	
+	/*
+	 * This controller test method used to start new Game
+	 */
+	@Test
+	public void startNewGame() throws Exception {
+		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
+		gameStateService.board = board;
+		this.mockMvc.perform(get("/newGame")).andDo(print()).andExpect(status().isOk())
+				.andExpect(content().string(containsString(response)));
+	}
 }

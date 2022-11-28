@@ -2,7 +2,6 @@ package com.example.tictactoe.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import com.example.tictactoe.pojo.GameResponse;
 import com.example.tictactoe.pojo.Player;
 import java.util.HashMap;
@@ -106,12 +105,18 @@ public class GameService {
      * This method updates board with the position which player moved
      */
     public GameResponse play(String position,String playerId) {
-    	playerService.played = playerId;
-    	board.put(position, playerId);
-        return new GameResponse(findWinner(), board,null);
+    	if(checkIfFirstMoveIsByO(playerId)) {
+            return new GameResponse(findWinner(), null ,"Only Player X can make first move!");
+        } else {
+	    	playerService.played = playerId;
+	    	board.put(position, playerId);
+	        return new GameResponse(findWinner(), board,null);
+        }
     }
     
-    
+    /*
+     * This method gives player details if won otherwise null
+     */
     private Player findWinner() {
         String winner = checkWinner();
         Player playerWinner;

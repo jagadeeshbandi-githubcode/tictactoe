@@ -41,4 +41,13 @@ public class GameController {
         return playerService.getPlayers();
     }
    
+    /** 
+     * This is the method starts new Game and returns board details
+     * @return Map<String,String> 
+     */
+    @GetMapping("/newGame")
+    public Map<String, String> newGame() {
+    	gameStateService.newGame();
+        return gameStateService.board;
+    }
 }
