@@ -16,6 +16,9 @@ public class GameServiceTest {
 	@Autowired
 	private GameService gameService;
 
+	@Autowired
+    private PlayerService playerService;
+	
 	Map<String,String> board;
   
 	@BeforeEach
@@ -158,7 +161,7 @@ public class GameServiceTest {
 	}
 	
 	/*
-	 * This test case updates board with the position which player moved
+	 * This test case to validate if first move should be from Player X
 	 */
 	@Test
 	public void validateIfFirstMoveIsByOPlayMethod() {
@@ -167,12 +170,23 @@ public class GameServiceTest {
 	}
 	
 	/*
-	 * This test case updates board with the position which player moved
+	 * This test case to validate position is already taken in previous moves
 	 */
 	@Test
 	public void validateForSamePosition() {
 		board.put("1", "X");
 		gameService.board = board;
 		assertEquals(new GameResponse(null, null ,"The position 1 is already taken!") , gameService.play("1","O"));
+	}
+	
+	/*
+	 * This test case to validate if same player moves multiple times
+	 */
+	@Test
+	public void validateIfSamePlayerMoves() {
+		playerService.played = "X";
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(new GameResponse(null, null ,"Player X already played!") , gameService.play("2","X"));
 	}
 }

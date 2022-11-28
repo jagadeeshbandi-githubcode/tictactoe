@@ -105,7 +105,9 @@ public class GameService {
      * This method updates board with the position which player moved
      */
     public GameResponse play(String position,String playerId) {
-    	if (board.get(position) != null) {
+    	if(playerService.played!=null && playerService.played.equalsIgnoreCase(playerId)) {
+            return new GameResponse(findWinner(), null ,"Player "+playerId+" already played!");
+        } else if (board.get(position) != null) {
         	return new GameResponse(findWinner(), null ,"The position "+position+" is already taken!");
         } else if(checkIfFirstMoveIsByO(playerId)) {
             return new GameResponse(findWinner(), null ,"Only Player X can make first move!");
