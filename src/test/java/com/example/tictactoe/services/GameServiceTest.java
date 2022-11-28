@@ -10,13 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class GameServiceTest {
   
-	private GameService state;
+	private GameService gameService;
 
 	Map<String,String> board;
   
 	@BeforeEach
 	public void setup() {
-		state = new GameService();
+		gameService = new GameService();
 		board = new HashMap<>();
 		board.put("1", null);
 		board.put("2", null);
@@ -31,7 +31,34 @@ public class GameServiceTest {
 
 	@Test
 	public void getBoard() {
-		assertEquals(board, state.board);
+		assertEquals(board, gameService.board);
 	}
 
+	
+	/*
+	 * This test case to show player X wins
+	 */
+	@Test
+	public void checkWinner() {
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("4", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("2", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("5", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("3", "X");
+		gameService.board = board;
+		assertEquals("X", gameService.checkWinner());
+	}
+	
 }
