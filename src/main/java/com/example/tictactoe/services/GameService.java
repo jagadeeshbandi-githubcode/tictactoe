@@ -80,4 +80,8 @@ public class GameService {
 
         return null;
     }
+    
+    public boolean checkIfFirstMoveIsByO(String player) {
+    	return this.board.values().stream().filter(Objects::isNull).count() == this.board.size() && player.equals("O") ? true : false;
+    }
 }

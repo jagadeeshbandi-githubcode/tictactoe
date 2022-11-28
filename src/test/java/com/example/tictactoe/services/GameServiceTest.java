@@ -133,4 +133,14 @@ public class GameServiceTest {
 		assertEquals("draw", gameService.checkWinner());
 		
 	}
+	
+	/*
+	 * This test case to check if the first move is done by Player O
+	 */
+	@Test
+	public void checkIfFirstMoveIsByO() {
+		
+		gameService.board = board;
+		assertEquals(true, gameService.checkIfFirstMoveIsByO("O"));
+	}
 }
