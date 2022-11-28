@@ -153,7 +153,6 @@ public class GameServiceTest {
 	 */
 	@Test
 	public void play() {
-		board.put("1", "X");
 		gameService.board = board;
 		assertEquals(new GameResponse(null, board,null) , gameService.play("1","X"));
 	}
@@ -162,8 +161,18 @@ public class GameServiceTest {
 	 * This test case updates board with the position which player moved
 	 */
 	@Test
-	public void checkIfFirstMoveIsByOPlayMethod() {
+	public void validateIfFirstMoveIsByOPlayMethod() {
 		gameService.board = board;
 		assertEquals(new GameResponse(null, null ,"Only Player X can make first move!") , gameService.play("1","O"));
+	}
+	
+	/*
+	 * This test case updates board with the position which player moved
+	 */
+	@Test
+	public void validateForSamePosition() {
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(new GameResponse(null, null ,"The position 1 is already taken!") , gameService.play("1","O"));
 	}
 }

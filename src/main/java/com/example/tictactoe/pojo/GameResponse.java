@@ -63,7 +63,7 @@ public class GameResponse {
 
         GameResponse guest = (GameResponse) obj;
         return gameOver == guest.gameOver
-                && message == guest.message
+                && (message == guest.message || (message!=null && message.equals(guest.message)))
                 && ((winner == guest.winner) || (winner!=null && winner.getId() == guest.winner.getId() && winner!=null && winner.getDescription() == guest.winner.getDescription()))
                 && state == guest.state;
     }
@@ -76,6 +76,7 @@ public class GameResponse {
         result = prime * result + ((message == null) ? 0 : message.hashCode());
         result = prime * result + ((winner.getId() == null) ? 0 : winner.getId().hashCode());
         result = prime * result + ((winner.getDescription() == null) ? 0 : winner.getDescription().hashCode());
+        result = prime * result + ((state == null) ? 0 : state.hashCode());
         return result;
     }
 
