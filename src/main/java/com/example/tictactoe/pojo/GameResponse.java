@@ -16,8 +16,11 @@ public class GameResponse {
         if(winner != null) {
             this.winner = winner;
             this.gameOver = true;
+            this.state = null;
+        }else {
+        	this.state = state;
         }
-        this.state = state;
+        
         this.message = message;
     }
 

@@ -64,10 +64,8 @@ public class GameControllerTest {
 	 */
 	@Test
 	public void getBoard() throws Exception {
-		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
 		gameService.board = board;
-		this.mockMvc.perform(get("/board")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString(response)));
+		assertEquals(board , gameController.getState());
 	}
 	
 	/*
@@ -75,10 +73,8 @@ public class GameControllerTest {
 	 */
 	@Test
 	public void startNewGame() throws Exception {
-		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
 		gameService.board = board;
-		this.mockMvc.perform(get("/newGame")).andDo(print()).andExpect(status().isOk())
-				.andExpect(content().string(containsString(response)));
+		assertEquals(board , gameController.newGame());
 	}
 	
 	/*
@@ -91,6 +87,23 @@ public class GameControllerTest {
 		gameService.board = board;
 		when(gameService.play("1", "X")).thenReturn(new GameResponse(null, board,null));
 		assertEquals(new GameResponse(null, board,null) , gameController.play("1","X"));
+
+	}
+	
+	/*
+	 * This controller moves position for a player and showing player X wins
+	 */
+	@Test
+	public void playGameForXWinnnig() throws Exception {
+		
+		board.put("1", "X");
+		board.put("4", "O");
+		board.put("2", "X");
+		board.put("5", "O");
+		board.put("3", "X");
+		gameService.board = board;
+		when(gameService.play("3", "X")).thenReturn(new GameResponse(new Player("X", "Player 1"), null ,null) );
+		assertEquals(new GameResponse(new Player("X", "Player 1"), null ,null)  , gameController.play("3","X"));
 
 	}
 }

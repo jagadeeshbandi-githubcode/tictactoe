@@ -141,7 +141,7 @@ public class GameService {
                 case "O":
                     playerWinner = playerService.getPlayer(winner);
                     endGame(true);
-                    board = null;
+                    //board = null;
                     playerService.played = null;
                     break;
                 case "draw":
