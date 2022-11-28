@@ -61,4 +61,36 @@ public class GameServiceTest {
 		assertEquals("X", gameService.checkWinner());
 	}
 	
+	
+	/*
+	 * This test case to show player O winning in diagonal line
+	 */
+	@Test
+	public void checkWinnerForO() {
+		
+		board.put("1", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("3", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("2", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("5", "O");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("6", "X");
+		gameService.board = board;
+		assertEquals(null, gameService.checkWinner());
+		
+		board.put("7", "O");
+		gameService.board = board;
+		assertEquals("O", gameService.checkWinner());
+	}
+	
 }
