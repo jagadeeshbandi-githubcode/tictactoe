@@ -3,6 +3,8 @@ package com.example.tictactoe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.tictactoe.pojo.GameResponse;
 import com.example.tictactoe.pojo.Player;
 import com.example.tictactoe.services.GameService;
 import com.example.tictactoe.services.PlayerService;
@@ -18,22 +20,22 @@ import java.util.Map;
 public class GameController {
 
 	@Autowired
-    private GameService gameStateService;
+    private GameService gameService;
 	
 	@Autowired
     private PlayerService playerService;
 
     /** 
-     * This is the method gives current board status. 
+     * This method gives current board status. 
      * @return Map<String,String> . 
      */
     @GetMapping("/board")
     public Map<String, String> getState() {
-        return gameStateService.board;
+        return gameService.board;
     }
 
     /** 
-     * This is the method returns list of players
+     * This method returns list of players
      * @return List<Player> . 
      */
     @GetMapping("/players")
@@ -42,12 +44,22 @@ public class GameController {
     }
    
     /** 
-     * This is the method starts new Game and returns board details
+     * This method starts new Game and returns board details
      * @return Map<String,String> 
      */
     @GetMapping("/newGame")
     public Map<String, String> newGame() {
-    	gameStateService.newGame();
-        return gameStateService.board;
+    	gameService.newGame();
+        return gameService.board;
+    }
+    
+    /*
+     * This method moves position for a player
+     * @Input  - position, playerId
+     * @return GameReponse
+     */
+    @GetMapping("/play")
+    public GameResponse play(@RequestParam String position,@RequestParam String playerId)  throws Exception{
+    	return gameService.play(position, playerId);
     }
 }

@@ -142,10 +142,12 @@ public class GameService {
                     playerWinner = playerService.getPlayer(winner);
                     endGame(true);
                     board = null;
+                    playerService.played = null;
                     break;
                 case "draw":
                     playerWinner = new Player("draw", "No one wins");
                     endGame(true);
+                    playerService.played = null;
                     break;
                 default:
                     playerWinner = null;

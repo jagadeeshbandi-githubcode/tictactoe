@@ -24,7 +24,6 @@ public class GameServiceTest {
   
 	@BeforeEach
 	public void setup() {
-		//gameService = new GameService();
 		board = new HashMap<>();
 		board.put("1", null);
 		board.put("2", null);

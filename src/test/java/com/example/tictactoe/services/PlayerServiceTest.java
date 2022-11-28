@@ -27,6 +27,9 @@ public class PlayerServiceTest {
         players.add(new Player("O", "Player 2"));
 	}
 
+	/*
+	 * This test case to get all Player Details
+	 */
 	@Test
 	public void getPlayers() {
 		playerService.players = players;

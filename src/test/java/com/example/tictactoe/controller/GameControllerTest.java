@@ -1,6 +1,7 @@
 package com.example.tictactoe.controller;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -22,6 +23,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.tictactoe.controller.GameController;
+import com.example.tictactoe.pojo.GameResponse;
+import com.example.tictactoe.pojo.Player;
 import com.example.tictactoe.services.GameService;
 import com.example.tictactoe.services.PlayerService;
 
@@ -32,12 +35,15 @@ public class GameControllerTest {
 	private MockMvc mockMvc;
 
 	@MockBean
-	private GameService gameStateService;
+	private GameService gameService;
 	
 	@MockBean
-	private PlayerService playersService;
+	private PlayerService playerService;
 
 	Map<String,String> board;
+	
+	@Autowired
+	private GameController gameController;
 	
 	@BeforeEach
 	public void setBoard() {
@@ -59,7 +65,7 @@ public class GameControllerTest {
 	@Test
 	public void getBoard() throws Exception {
 		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
-		gameStateService.board = board;
+		gameService.board = board;
 		this.mockMvc.perform(get("/board")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(response)));
 	}
@@ -70,8 +76,21 @@ public class GameControllerTest {
 	@Test
 	public void startNewGame() throws Exception {
 		String response = "{\"1\":null,\"2\":null,\"3\":null,\"4\":null,\"5\":null,\"6\":null,\"7\":null,\"8\":null,\"9\":null}";
-		gameStateService.board = board;
+		gameService.board = board;
 		this.mockMvc.perform(get("/newGame")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString(response)));
+	}
+	
+	/*
+	 * This controller moves position for a player
+	 */
+	@Test
+	public void playGame() throws Exception {
+		
+		board.put("1", "X");
+		gameService.board = board;
+		when(gameService.play("1", "X")).thenReturn(new GameResponse(null, board,null));
+		assertEquals(new GameResponse(null, board,null) , gameController.play("1","X"));
+
 	}
 }
