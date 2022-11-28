@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/*
+ * This service is to manage games by getting game board 
+ * details and playing by turns
+ */
 @Service
 public class GameService {
 
