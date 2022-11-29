@@ -71,7 +71,7 @@ public class GameResponse {
         GameResponse guest = (GameResponse) obj;
         return gameOver == guest.gameOver
                 && (message == guest.message || (message!=null && message.equals(guest.message)))
-                && ((winner == guest.winner) || (winner!=null && winner.getId() == guest.winner.getId() && winner!=null && winner.getDescription() == guest.winner.getDescription()))
+                && ((winner == guest.winner) || (winner!=null && winner.getId() == guest.winner.getId() && winner.getDescription() == guest.winner.getDescription()))
                 && state == guest.state;
     }
     

@@ -1,6 +1,8 @@
 package com.example.tictactoe.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
@@ -159,6 +161,15 @@ public class GameServiceTest {
 	}
 	
 	/*
+	 * This test case to check if the first move is done by Player O
+	 */
+	@Test
+	public void checkIfFirstMoveIsByX() {
+		gameService.board = board;
+		assertEquals(false, gameService.checkIfFirstMoveIsByO("X"));
+	}
+	
+	/*
 	 * This test case updates board with the position which player moved
 	 */
 	@Test
@@ -210,5 +221,23 @@ public class GameServiceTest {
 		board.put("3", "X");
 		gameService.board = board;
 		assertEquals(new GameResponse(new Player("X", "Player 1"), null ,null) , gameService.play("6","O"));
+	}
+	
+	
+	/*
+	 * This test case for checking draw condition for findWinner method
+	 */
+	@Test
+	public void findWinnerforDraw() {
+		board.put("1", "X");
+		board.put("3", "O");
+		board.put("2", "X");
+		board.put("5", "O");
+		board.put("6", "X");
+		board.put("8", "O");
+		board.put("7", "X");
+		board.put("4", "O");
+		gameService.board = board;
+		assertEquals(new Player("draw", "No one wins") , gameService.findWinner());
 	}
 }

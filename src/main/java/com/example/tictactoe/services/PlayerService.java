@@ -16,7 +16,7 @@ import com.example.tictactoe.pojo.Player;
 @Service
 public class PlayerService {
     
-	List<Player> players;
+	public List<Player> players;
 	
 	public String played;
 	

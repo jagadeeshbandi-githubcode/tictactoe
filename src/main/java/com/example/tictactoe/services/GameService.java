@@ -84,9 +84,9 @@ public class GameService {
                     line = board.get("3") + board.get("5") + board.get("7");
                     break;
             }
-            if (line.equals("XXX")) {
+            if (line!=null && line.equals("XXX")) {
                 return "X";
-            } else if (line.equals("OOO")) {
+            } else if (line!=null && line.equals("OOO")) {
                 return "O";
             }
         }
@@ -140,7 +140,7 @@ public class GameService {
     /*
      * This method gives player details if won otherwise null
      */
-    private Player findWinner() {
+    public Player findWinner() {
         String winner = checkWinner();
         Player playerWinner;
 

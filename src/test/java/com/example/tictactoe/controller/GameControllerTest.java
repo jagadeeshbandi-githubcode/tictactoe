@@ -64,7 +64,7 @@ public class GameControllerTest {
 	}
 	
 	/*
-	 * This controller moves position for a player
+	 * This controller test method to move position for a player
 	 */
 	@Test
 	public void playGame() throws Exception {
@@ -77,7 +77,7 @@ public class GameControllerTest {
 	}
 	
 	/*
-	 * This controller moves position for a player and showing player X wins
+	 * This controller test method to move position for a player and showing player X wins
 	 */
 	@Test
 	public void playGameForXWinnnig() throws Exception {
