@@ -2,12 +2,47 @@
 
 Tic Tac Toe game has a grid of 3x3, the playerIds are "X" and "O". Player X should have first move always.
 
+When any player moves with a position then that respective position will be filled in the grid.
+
+Always play should happen on turns i.e., First Player X then Player O and then Player X.
+
+If any player moves with some position and if any of the complete line is filled with same player then that player is declared as winner. It can be horizontal/Vertical/Diaganol line.
+
 Three API endpoints are provided
 
 1.	GET /board
 2.	GET /players
 3.  GET /newGame
 4.	GET /play
+
+# How to run
+
+Download zip file from https://github.com/jagadeeshbandi-githubcode/tictactoe from Code option
+
+Unzip the downloaded file. Go to project folder and run below command from command prompt(Make sure maven is installed)
+
+	mvn spring-boot:run
+
+Open browser and access endpoints as below samples
+
+http://localhost:8080/play?position=1&playerId=X
+
+http://localhost:8080/players
+
+http://localhost:8080/board
+
+http://localhost:8080/newGame
+
+
+# Assumptions
+
+Only one game can be played at a time. 
+
+/newGame endpoint is used to restart game if required.
+
+# Technical Specifications
+
+Java 8, Spring Boot ( REST, WEB, Test) , Maven , GIT
 
 # Endpoints
 
@@ -157,3 +192,7 @@ Sample response - New Game and when player O playes first. Show message as below
     "state": null,
 	"message": "The position 1 is already taken!"
 }
+
+
+
+
