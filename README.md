@@ -149,6 +149,17 @@ When there is a winner GET request will return with 200 and return the winner.
 	"message": null
 }
 
+Below steps can be followed to make Player X win
+
+http://localhost:8080/play?position=1&playerId=X
+
+http://localhost:8080/play?position=4&playerId=O
+
+http://localhost:8080/play?position=2&playerId=X
+
+http://localhost:8080/play?position=5&playerId=O
+
+http://localhost:8080/play?position=3&playerId=X
 
 ### Sample response - Player X already played
 
