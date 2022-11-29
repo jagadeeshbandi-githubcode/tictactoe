@@ -10,8 +10,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /*
- * This service is to manage games by getting game board 
- * details and playing by turns
+ * This service is to manage games by getting game board details and playing by turns
+ * checkWinner - to check if any player wins
+ * checkIfFirstMoveIsByO - validation method to check if first move is made by player O
+ * play - method to play game on turns and respond with GameResponse object
+ * findWinner - To get winner details if completed otherwise null value
  */
 @Service
 public class GameService {
@@ -23,10 +26,16 @@ public class GameService {
     @Autowired
     private PlayerService playerService;
     
+    /*
+     * Constructor Method to start new Game
+     */
     public GameService() {
     	newGame();
     }
 
+    /*
+     * Method to start new Game
+     */
     public void newGame() {
     	this.board = new HashMap<>();
     	this.board.put("1", null);

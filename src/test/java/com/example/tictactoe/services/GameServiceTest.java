@@ -11,6 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.tictactoe.pojo.GameResponse;
 import com.example.tictactoe.pojo.Player;
 
+/*
+ * This service test class contains test cases for different scenarios of playing game
+ */
 @SpringBootTest
 public class GameServiceTest {
   
@@ -36,6 +39,9 @@ public class GameServiceTest {
 		board.put("9", null);
 	}
 
+	/*
+	 * This test case to return current board
+	 */
 	@Test
 	public void getBoard() {
 		gameService.board = board;

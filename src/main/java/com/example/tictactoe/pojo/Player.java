@@ -1,5 +1,10 @@
 package com.example.tictactoe.pojo;
 
+/*
+ * Pojo to hold player details
+ * id - X or O values
+ * description - Player name
+ */
 public class Player {
 	
     private final String id;

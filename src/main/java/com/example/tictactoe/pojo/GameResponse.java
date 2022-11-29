@@ -3,7 +3,11 @@ package com.example.tictactoe.pojo;
 import java.util.Map;
 
 /*
- * This Response holds data with gameOver field , winner details , board details and message to display
+ * This Response holds data with 
+ * gameOver - boolean value showing if game is completed or not 
+ * winner - Player object if game completed otherwise null value
+ * board -  Map object of String key and values. key is the position and value is the playerId
+ * message - any validation message if exists otherwise null value will be returned
  */
 public class GameResponse {
 	

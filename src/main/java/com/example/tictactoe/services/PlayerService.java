@@ -10,6 +10,8 @@ import com.example.tictactoe.pojo.Player;
 
 /*
  * This service is to manage players and to get Player Details
+ * getPlayers - To return list of players with id and description details
+ * getPlayer - Get Player details with id and description based on input player
  */
 @Service
 public class PlayerService {
@@ -24,6 +26,9 @@ public class PlayerService {
         players.add(new Player("O", "Player 2"));
     }
 
+    /*
+     * To return list of players with id and description details
+     */
     public List<Player> getPlayers() {
         return players;
     }

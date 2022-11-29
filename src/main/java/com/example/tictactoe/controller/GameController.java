@@ -14,7 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 /*
- * This controller manages calls for different scenarios for playing game
+ * This controller manages calls for playing game
+ * Three API end points are provided
+ * /board - To return current state of the board
+ * /players - To return list of the available players
+ * /newGame - To reset the board and returns fresh board
+ * /play - To be called every time a player takes a turn on the board
  */
 @RestController
 public class GameController {
