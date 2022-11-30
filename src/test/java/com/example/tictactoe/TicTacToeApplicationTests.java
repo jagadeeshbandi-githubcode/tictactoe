@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 class TicTacToeApplicationTests {
 
 	@Test
-    public void test()
+    void test()
     {
 		TicTacToeApplication.main(new String[]{
                 "--spring.main.web-environment=false",

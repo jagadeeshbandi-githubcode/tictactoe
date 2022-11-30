@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class GameResponse {
 	
-    public Boolean gameOver = false;
+	public Boolean gameOver = false;
     public Player winner;
     public Map<String, String> state;
     public String message;

@@ -42,7 +42,7 @@ public class PlayerService {
         List<Player> collect = players.stream()
                 .filter(e -> e.getId().equals(player))
                 .collect(Collectors.toList());
-        if (collect.size() > 0) {
+        if (!collect.isEmpty()) {
             return collect.get(0);
         }
         return null;

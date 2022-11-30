@@ -143,14 +143,13 @@ public class GameService {
     public Player findWinner() {
         String winner = checkWinner();
         Player playerWinner;
-
+         
         if (winner != null) {
             switch (winner) {
                 case "X":
                 case "O":
                     playerWinner = playerService.getPlayer(winner);
                     endGame(true);
-                    //board = null;
                     playerService.played = null;
                     break;
                 case "draw":

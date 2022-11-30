@@ -2,7 +2,10 @@ package com.example.tictactoe.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +21,7 @@ import com.example.tictactoe.services.PlayerService;
  * This controller test class has test cases to manages calls for playing game
  */
 @WebMvcTest(GameController.class)
-public class GameControllerTest {
+class GameControllerTest {
 
 	@MockBean
 	private GameService gameService;
@@ -32,7 +35,7 @@ public class GameControllerTest {
 	private GameController gameController;
 	
 	@BeforeEach
-	public void setBoard() {
+	void setBoard() {
 		board = new HashMap<>();
 		board.put("1", null);
 		board.put("2", null);
@@ -49,7 +52,7 @@ public class GameControllerTest {
 	 * This controller test method used to get current board details
 	 */
 	@Test
-	public void getBoard() throws Exception {
+	void testGetBoard() throws Exception {
 		gameService.board = board;
 		assertEquals(board , gameController.getState());
 	}
@@ -58,7 +61,7 @@ public class GameControllerTest {
 	 * This controller test method used to start new Game
 	 */
 	@Test
-	public void startNewGame() throws Exception {
+	void testStartNewGame() throws Exception {
 		gameService.board = board;
 		assertEquals(board , gameController.newGame());
 	}
@@ -67,7 +70,7 @@ public class GameControllerTest {
 	 * This controller test method to move position for a player
 	 */
 	@Test
-	public void playGame() throws Exception {
+	void testPlayGame() throws Exception {
 		
 		board.put("1", "X");
 		gameService.board = board;
@@ -80,7 +83,7 @@ public class GameControllerTest {
 	 * This controller test method to move position for a player and showing player X wins
 	 */
 	@Test
-	public void playGameForXWinnnig() throws Exception {
+	void TestPlayGameForXWinnnig() throws Exception {
 		
 		board.put("1", "X");
 		board.put("4", "O");
@@ -91,5 +94,18 @@ public class GameControllerTest {
 		when(gameService.play("3", "X")).thenReturn(new GameResponse(new Player("X", "Player 1"), null ,null) );
 		assertEquals(new GameResponse(new Player("X", "Player 1"), null ,null)  , gameController.play("3","X"));
 
+	}
+	
+	/*
+	 * This controller test case to get all Player Details
+	 */
+	@Test
+	void testGetPlayers() {
+		List<Player> players;
+		players = new ArrayList<>(2);
+        players.add(new Player("X", "Player 1"));
+        players.add(new Player("O", "Player 2"));
+        when(playerService.getPlayers()).thenReturn(players);
+		assertEquals(players, gameController.getPlayers());
 	}
 }

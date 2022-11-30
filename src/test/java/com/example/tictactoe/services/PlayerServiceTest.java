@@ -16,7 +16,7 @@ import com.example.tictactoe.pojo.Player;
  * This Player test class contains test cases for setting player details and getting player details 
  */
 @SpringBootTest
-public class PlayerServiceTest {
+class PlayerServiceTest {
   
     @Autowired
 	private PlayerService playerService;
@@ -24,7 +24,7 @@ public class PlayerServiceTest {
 	List<Player> players;
 	
 	@BeforeEach
-	public void setup() {
+	void setup() {
 		players = new ArrayList<>(2);
         players.add(new Player("X", "Player 1"));
         players.add(new Player("O", "Player 2"));
@@ -34,7 +34,7 @@ public class PlayerServiceTest {
 	 * This test case to get all Player Details
 	 */
 	@Test
-	public void getPlayers() {
+	void testGetPlayers() {
 		playerService.players = players;
 		assertEquals(players, playerService.getPlayers());
 	}
@@ -43,8 +43,16 @@ public class PlayerServiceTest {
 	 * This test case to get Player Details
 	 */
 	@Test
-	public void getPlayerDetails() {
+	void testGetPlayerDetails() {
 		assertEquals(new Player("X", "Player 1"), playerService.getPlayer("X"));
 	}
 	
+	
+	/*
+	 * This test case to get Invalid Player Details
+	 */
+	@Test
+	void testGetInvalidPlayerDetails() {
+		assertEquals(null, playerService.getPlayer("S"));
+	}
 }
