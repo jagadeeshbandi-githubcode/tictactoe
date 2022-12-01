@@ -201,7 +201,7 @@ Sample response - New Game and when player O playes first. Show message as below
 	"gameOver": false,
     "winner": null,
     "state": null,
-	"message": "The position 1 is already taken!"
+	"message": "Only Player X can make first move!"
 }
 
 
