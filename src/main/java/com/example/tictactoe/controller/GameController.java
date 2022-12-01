@@ -52,6 +52,7 @@ public class GameController {
     @GetMapping("/newGame")
     public Map<String, String> newGame() {
     	gameService.newGame();
+    	playerService.played = null;
         return gameService.board;
     }
     

@@ -56,8 +56,8 @@ public class GameService {
      * if all boxes are filled and no one wins , it is declared draw
      */
     public String checkWinner() {
-        for (int x = 1; x < 9; x++) {
-            String line = null;
+        for (int x = 1; x <= 9; x++) {
+            String line = "";
             switch (x) {
                 case 1:
                     line = board.get("1") + board.get("2") + board.get("3");
@@ -84,9 +84,10 @@ public class GameService {
                     line = board.get("3") + board.get("5") + board.get("7");
                     break;
             }
-            if (line!=null && line.equals("XXX")) {
+            if (line.equals("XXX")) {
                 return "X";
-            } else if (line!=null && line.equals("OOO")) {
+            } 
+            if (line.equals("OOO")) {
                 return "O";
             }
         }
@@ -142,27 +143,21 @@ public class GameService {
      */
     public Player findWinner() {
         String winner = checkWinner();
-        Player playerWinner;
-         
-        if (winner != null) {
-            switch (winner) {
-                case "X":
-                case "O":
-                    playerWinner = playerService.getPlayer(winner);
-                    endGame(true);
-                    playerService.played = null;
-                    break;
-                case "draw":
-                    playerWinner = new Player("draw", "No one wins");
-                    endGame(true);
-                    playerService.played = null;
-                    break;
-                default:
-                    playerWinner = null;
-            }
-            return playerWinner;
-        }
+        Player playerWinner=null;
 
+        if(winner!=null) {
+        	if(winner.equals("X") || winner.equals("O")) {
+	        	playerWinner = playerService.getPlayer(winner);
+	            endGame(true);
+	            playerService.played = null;
+        	}
+        	else {
+	        	 playerWinner = new Player("draw", "No one wins");
+	             endGame(true);
+	             playerService.played = null;
+	        }
+        	return playerWinner;
+        }
         return null;
     }
 }

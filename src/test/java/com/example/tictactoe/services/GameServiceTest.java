@@ -161,6 +161,16 @@ class GameServiceTest {
 	}
 	
 	/*
+	 * This test case to check if the first move is done by Player O but board filled with move
+	 */
+	@Test
+	void checkIfFirstMoveIsByO_Negative() {
+		board.put("8", "O");
+		gameService.board = board;
+		assertEquals(false	, gameService.checkIfFirstMoveIsByO("O"));
+	}
+	
+	/*
 	 * This test case to check if the first move is done by Player O
 	 */
 	@Test
@@ -225,10 +235,10 @@ class GameServiceTest {
 	
 	
 	/*
-	 * This test case for checking draw condition for findWinner method
+	 * This test case for finding Winner when match is draw
 	 */
 	@Test
-	void findWinnerforDraw() {
+	void testFindWinnerforDraw() {
 		board.put("1", "X");
 		board.put("3", "O");
 		board.put("2", "X");
@@ -239,5 +249,35 @@ class GameServiceTest {
 		board.put("4", "O");
 		gameService.board = board;
 		assertEquals(new Player("draw", "No one wins") , gameService.findWinner());
+	}
+	
+	
+	/*
+	 * This test case for finding Winner when player X wins
+	 */
+	@Test
+	void testFindWinner_PlayerXWin() {
+		board.put("1", "X");
+		board.put("4", "O");
+		board.put("2", "X");
+		board.put("5", "O");
+		board.put("3", "X");
+		gameService.board = board;
+		assertEquals(new Player("X", "Player 1") , gameService.findWinner());
+	}
+	
+	/*
+	 * This test case for finding Winner when player O wins
+	 */
+	@Test
+	void testFindWinner_PlayerOWin() {
+		board.put("1", "X");
+		board.put("4", "O");
+		board.put("2", "X");
+		board.put("5", "O");
+		board.put("8", "X");
+		board.put("6", "O");
+		gameService.board = board;
+		assertEquals(new Player("O", "Player 2") , gameService.findWinner());
 	}
 }
