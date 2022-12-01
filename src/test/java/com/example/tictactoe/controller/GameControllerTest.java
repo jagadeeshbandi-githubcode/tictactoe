@@ -83,7 +83,7 @@ class GameControllerTest {
 	 * This controller test method to move position for a player and showing player X wins
 	 */
 	@Test
-	void TestPlayGameForXWinnnig() throws Exception {
+	void testPlayGameForXWinnnig() throws Exception {
 		
 		board.put("1", "X");
 		board.put("4", "O");

@@ -39,6 +39,7 @@ class GameServiceTest {
 		board.put("7", null);
 		board.put("8", null);
 		board.put("9", null);
+		gameService.gameOver = false;
 	}
 
 	/*
@@ -55,7 +56,7 @@ class GameServiceTest {
 	 * This test case to show player X wins
 	 */
 	@Test
-	void checkWinner() {
+	void testCheckWinner() {
 		board.put("1", "X");
 		gameService.board = board;
 		assertEquals(null, gameService.checkWinner());
@@ -82,7 +83,7 @@ class GameServiceTest {
 	 * This test case to show player O winning in diagonal line
 	 */
 	@Test
-	void checkWinnerForO() {
+	void testCheckWinnerForO() {
 		
 		board.put("1", "X");
 		gameService.board = board;
@@ -114,7 +115,7 @@ class GameServiceTest {
 	 * This test case to draw the match
 	 */
 	@Test
-	void checkWinnerToDraw() {
+	void testCheckWinnerToDraw() {
 		
 		board.put("1", "X");
 		gameService.board = board;
@@ -154,7 +155,7 @@ class GameServiceTest {
 	 * This test case to check if the first move is done by Player O
 	 */
 	@Test
-	void checkIfFirstMoveIsByO() {
+	void testCheckIfFirstMoveIsByO() {
 		
 		gameService.board = board;
 		assertEquals(true, gameService.checkIfFirstMoveIsByO("O"));
@@ -164,7 +165,7 @@ class GameServiceTest {
 	 * This test case to check if the first move is done by Player O but board filled with move
 	 */
 	@Test
-	void checkIfFirstMoveIsByO_Negative() {
+	void testCheckIfFirstMoveIsByO_Negative() {
 		board.put("8", "O");
 		gameService.board = board;
 		assertEquals(false	, gameService.checkIfFirstMoveIsByO("O"));
@@ -174,7 +175,7 @@ class GameServiceTest {
 	 * This test case to check if the first move is done by Player O
 	 */
 	@Test
-	void checkIfFirstMoveIsByX() {
+	void testCheckIfFirstMoveIsByX() {
 		gameService.board = board;
 		assertEquals(false, gameService.checkIfFirstMoveIsByO("X"));
 	}
@@ -183,7 +184,7 @@ class GameServiceTest {
 	 * This test case updates board with the position which player moved
 	 */
 	@Test
-	void play() {
+	void testPlay() {
 		gameService.board = board;
 		assertEquals(new GameResponse(null, board,null) , gameService.play("1","X"));
 	}
@@ -192,7 +193,7 @@ class GameServiceTest {
 	 * This test case to validate if first move should be from Player X
 	 */
 	@Test
-	void validateIfFirstMoveIsByOPlayMethod() {
+	void testIfFirstMoveIsByOPlayMethod() {
 		gameService.board = board;
 		assertEquals(new GameResponse(null, null ,"Only Player X can make first move!") , gameService.play("1","O"));
 	}
@@ -201,7 +202,7 @@ class GameServiceTest {
 	 * This test case to validate position is already taken in previous moves
 	 */
 	@Test
-	void validateForSamePosition() {
+	void testPlayForSamePosition() {
 		board.put("1", "X");
 		gameService.board = board;
 		assertEquals(new GameResponse(null, null ,"The position 1 is already taken!") , gameService.play("1","O"));
@@ -211,7 +212,7 @@ class GameServiceTest {
 	 * This test case to validate if same player moves multiple times
 	 */
 	@Test
-	void validateIfSamePlayerMoves() {
+	void testPlayIfSamePlayerMoves() {
 		playerService.played = "X";
 		board.put("1", "X");
 		gameService.board = board;
@@ -222,7 +223,7 @@ class GameServiceTest {
 	 * This test case for already completed game
 	 */
 	@Test
-	void validateIfGameOver() {
+	void testIfGameOver() {
 		gameService.gameOver = true;
 		board.put("1", "X");
 		board.put("4", "O");
